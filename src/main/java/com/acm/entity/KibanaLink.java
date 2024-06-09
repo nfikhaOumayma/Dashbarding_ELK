@@ -2,44 +2,43 @@ package com.acm.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @Entity
 @Table(name = "ACM_KibanaLink")
-public class KibanaLink  implements Serializable {
-
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+public class KibanaLink implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID", unique = true, nullable = false)
 	private long id;
-	
-	@Column(name = "link" , columnDefinition = "VARCHAR(MAX)")
-	private String link;
-	
-	@Column(name = "Filter" ,columnDefinition = "VARCHAR(MAX)")
-	private String filter;
-	
-	@Column(name = "dateInsert")
-	private Date dateInsert;
 
+	@Column(name = "link", columnDefinition = "VARCHAR(MAX)")
+	private String link;
+
+	@Column(name = "Filter", columnDefinition = "VARCHAR(MAX)")
+	private String filter;
+
+	@Column(name = "dateinsert")
+	private Date dateInsert;
+	
+	@OneToMany(mappedBy = "kibanaLink", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Filter> filters;
+	
 	public long getId() {
 	
 		return id;
@@ -96,13 +95,6 @@ public class KibanaLink  implements Serializable {
 	}
 
 	@Override
-	public String toString() {
-
-		return "KibanaLink [id=" + id + ", link=" + link + ", filter=" + filter + ", dateInsert="
-				+ dateInsert + "]";
-	}
-
-	@Override
 	public int hashCode() {
 
 		return Objects.hash(dateInsert, filter, id, link);
@@ -122,6 +114,11 @@ public class KibanaLink  implements Serializable {
 				&& id == other.id && Objects.equals(link, other.link);
 	}
 
-	
-	
+	@Override
+	public String toString() {
+
+		return "KibanaLink [id=" + id + ", link=" + link + ", filter=" + filter + ", dateInsert="
+				+ dateInsert + "]";
+	}
+
 }

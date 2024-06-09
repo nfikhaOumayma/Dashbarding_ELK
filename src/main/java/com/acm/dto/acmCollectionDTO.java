@@ -37,6 +37,6 @@ public class acmCollectionDTO {
 			this.owner = owner;
 			this.statut = statut;
 			this.date = (new LocalDate()).toString("yyyy-MM-dd");
-			}
-	    
+			}   
 }
+

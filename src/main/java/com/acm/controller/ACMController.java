@@ -30,7 +30,7 @@ public class ACMController {
     public String Createindex() {
             s.indexObjects(crep.getCollections(), "acmcollection");
             s.indexObjects(lrep.loanIndex(), "loans");
-            return "successful";
+            return "All the indexes are dreated successfully go to elastic search to check them";
     }
 	@GetMapping("/collaborateurs")
     public List<User> getCollaborateurs(@RequestParam String responsableId) {

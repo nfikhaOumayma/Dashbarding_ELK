@@ -15,4 +15,7 @@ public interface IServiceKibanaLink {
 	public KibanaLink updateKibanaLink(KibanaLink kibanalink , Long id);
 	
 	public Boolean deleteKibanaLink(Long id);
+	
+	public KibanaLink getLastInsertedKibanaLink();
+
 }

@@ -20,33 +20,43 @@ import com.acm.service.IServiceKibanaLink;
 @RequestMapping("kibanalinks")
 @CrossOrigin("*")
 public class KibanaLinkController {
-@Autowired
-IServiceKibanaLink iservicekibanalink;
+	@Autowired
+	IServiceKibanaLink iservicekibanalink;
 
+	@GetMapping("/fetchAll")
+	public List<KibanaLink> getAll() {
 
-@GetMapping("/fetchAll")
-public List<KibanaLink> getAll(){
-	return iservicekibanalink.getLinks();
-}
+		return iservicekibanalink.getLinks();
+	}
 
-@GetMapping("/fetch/{id}")
-public KibanaLink getOne(@PathVariable("id") Long id) {
-	return iservicekibanalink.getLinkById(id);
-}
+	@GetMapping("/fetch/{id}")
+	public KibanaLink getOne(@PathVariable("id") Long id) {
 
-@PostMapping("/add")
-public Boolean addKibanaLink(@RequestBody KibanaLink kibanaLink) {
-	return iservicekibanalink.createKibanaLink(kibanaLink);
-}
+		return iservicekibanalink.getLinkById(id);
+	}
 
-@PutMapping("/update/{id}")
-public KibanaLink updateKibanaLink(@RequestBody KibanaLink kibanalink , @PathVariable("id") Long id) {
-	return iservicekibanalink.updateKibanaLink(kibanalink, id);
-}
+	@PostMapping("/add")
+	public Boolean addKibanaLink(@RequestBody KibanaLink kibanaLink) {
 
-@DeleteMapping("/delete/{id}")
-public boolean deleteKibanaLink(@PathVariable("id") Long id) {
-	return iservicekibanalink.deleteKibanaLink(id);
-} 
+		return iservicekibanalink.createKibanaLink(kibanaLink);
+	}
+
+	@PutMapping("/update/{id}")
+	public KibanaLink updateKibanaLink(@RequestBody KibanaLink kibanalink,
+			@PathVariable("id") Long id) {
+
+		return iservicekibanalink.updateKibanaLink(kibanalink, id);
+	}
+
+	@DeleteMapping("/delete/{id}")
+	public boolean deleteKibanaLink(@PathVariable("id") Long id) {
+
+		return iservicekibanalink.deleteKibanaLink(id);
+	}
+	
+	@GetMapping("/Last")
+    public KibanaLink getLastKibanaLink() {
+        return iservicekibanalink.getLastInsertedKibanaLink();
+    }
 
 }
